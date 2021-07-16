@@ -31,7 +31,14 @@ var firstList = d3.select('#firstList')
 .enter()
 .append('option')
 .attr('value',d => d)
-.text(d=>columns[d]);
+.text(d=>columns[d])
+.each(function(d,i) {
+	if(d == xfield) {
+		console.log(d)
+		d3.select(this).attr("selected","selected")
+	}
+});
+
 
 var secondList = d3.select('#secondList')
 .selectAll('option')
@@ -39,7 +46,13 @@ var secondList = d3.select('#secondList')
 .enter()
 .append('option')
 .attr('value',d => d)
-.text(d=>columns[d]);
+.text(d=>columns[d])
+.each(function(d,i) {
+	if(d == yfield) {
+		console.log(d)
+		d3.select(this).attr("selected","selected")
+	}
+});
 
 
 
@@ -191,10 +204,6 @@ function updateGraph() {
 	
 }
 
-function init(){
-	d3.select("#firstColumn").selectAll('option').filter(d => d.value == xfield).attr("selected", true);
-}
 
-init()
 updateGraph();
 d3.select(window).on("resize", updateGraph());
